@@ -42,7 +42,18 @@ fun MediaItem() {
         ) {
 
         }
-        Text("Title 1")
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.secondary)
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Title 1",
+                style = MaterialTheme.typography.h6
+            )
+        }
     }
 }
 
@@ -52,29 +63,4 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         modifier = modifier,
         text = "Hello $name!"
     )
-}
-
-@Preview(showBackground = true, name = "Android Greeting")
-@Composable
-fun DefaultPreview() {
-    MyMoviesTheme {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp),
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Greeting(
-                name = "Android",
-                modifier = Modifier
-                    .background(Color.LightGray)
-            )
-            Greeting(
-                name = "Antonio",
-                modifier = Modifier
-                    .background(Color.Yellow)
-            )
-        }
-    }
 }
