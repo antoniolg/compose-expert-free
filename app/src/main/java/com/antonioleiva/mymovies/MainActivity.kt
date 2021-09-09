@@ -12,13 +12,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircleOutline
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -32,46 +33,32 @@ class MainActivity : ComponentActivity() {
             MyMoviesTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    val (value, onValueChange) = rememberSaveable { mutableStateOf("") }
-                    SimpleForm(
-                        value = value,
-                        onValueChange = onValueChange
-                    )
+                    Scaffold(
+                        topBar = {
+                            TopAppBar(
+                                title = { Text(stringResource(id = R.string.app_name)) },
+                                actions = {
+                                    IconButton(onClick = { /*TODO*/ }) {
+                                        Icon(
+                                            imageVector = Icons.Default.Search,
+                                            contentDescription = null
+                                        )
+                                    }
+                                    IconButton(onClick = { /*TODO*/ }) {
+                                        Icon(
+                                            imageVector = Icons.Default.Share,
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
+                            )
+                        }
+                    ) { padding ->
+                        MediaList(Modifier.padding(padding))
+                    }
+
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun SimpleForm(
-    value: String,
-    onValueChange: (String) -> Unit
-) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(64.dp)
-    ) {
-        TextField(
-            value = value,
-            onValueChange = { onValueChange(it) },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Text(
-            text = value,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Yellow)
-                .padding(8.dp)
-        )
-        Button(
-            onClick = { onValueChange("") },
-            enabled = value.isNotEmpty(),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Clear")
         }
     }
 }
@@ -79,10 +66,11 @@ fun SimpleForm(
 @ExperimentalFoundationApi
 @Preview
 @Composable
-fun MediaList() {
+fun MediaList(modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         cells = GridCells.Adaptive(150.dp),
-        contentPadding = PaddingValues(2.dp)
+        contentPadding = PaddingValues(2.dp),
+        modifier = modifier
     ) {
         items(getMedia()) {
             MediaListItem(
