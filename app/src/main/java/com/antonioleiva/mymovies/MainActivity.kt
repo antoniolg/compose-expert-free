@@ -9,13 +9,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,9 +32,46 @@ class MainActivity : ComponentActivity() {
             MyMoviesTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    MediaList()
+                    val (value, onValueChange) = rememberSaveable { mutableStateOf("") }
+                    SimpleForm(
+                        value = value,
+                        onValueChange = onValueChange
+                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun SimpleForm(
+    value: String,
+    onValueChange: (String) -> Unit
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(64.dp)
+    ) {
+        TextField(
+            value = value,
+            onValueChange = { onValueChange(it) },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = value,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Yellow)
+                .padding(8.dp)
+        )
+        Button(
+            onClick = { onValueChange("") },
+            enabled = value.isNotEmpty(),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Clear")
         }
     }
 }
