@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cell_min_width">150dp</dimen>
+    <dimen name="cell_thumb_height">200dp</dimen>
+    <dimen name="cell_play_icon_size">92dp</dimen>
+
+    <dimen name="padding_xsmall">2dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+</resources>

@@ -1,6 +1,6 @@
-package com.antonioleiva.mymovies
+package com.antonioleiva.mymovies.model
 
-import com.antonioleiva.mymovies.MediaItem.Type
+import com.antonioleiva.mymovies.model.MediaItem.Type
 
 data class MediaItem(
     val id: Int,
