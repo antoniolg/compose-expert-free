@@ -7,21 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import coil.compose.AsyncImage
-import androidx.navigation.NavHostController
-import coil.compose.rememberImagePainter
 import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.model.MediaItem
 import com.antonioleiva.mymovies.model.getMedia
@@ -30,7 +22,10 @@ import com.antonioleiva.mymovies.ui.screens.shared.Thumb
 
 @ExperimentalFoundationApi
 @Composable
-fun MediaList(navController: NavHostController, modifier: Modifier = Modifier) {
+fun MediaList(
+    onClick: (MediaItem) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyVerticalGrid(
         cells = GridCells.Adaptive(dimensionResource(R.dimen.cell_min_width)),
         contentPadding = PaddingValues(dimensionResource(R.dimen.padding_xsmall)),
@@ -39,7 +34,7 @@ fun MediaList(navController: NavHostController, modifier: Modifier = Modifier) {
         items(getMedia()) {
             MediaListItem(
                 mediaItem = it,
-                navController = navController,
+                onClick = { onClick(it) },
                 modifier = Modifier.padding(dimensionResource(R.dimen.padding_xsmall))
             )
         }
@@ -49,12 +44,11 @@ fun MediaList(navController: NavHostController, modifier: Modifier = Modifier) {
 @Composable
 fun MediaListItem(
     mediaItem: MediaItem,
-    navController: NavHostController,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier
-            .clickable { navController.navigate("detail/${mediaItem.id}") }
+        modifier = modifier.clickable { onClick() }
     ) {
         Thumb(mediaItem)
         Title(mediaItem)
@@ -82,6 +76,6 @@ private fun Title(mediaItem: MediaItem) {
 fun MediaListItemPreview() {
     MyMoviesApp {
         val mediaItem = MediaItem(1, "Item 1", "", MediaItem.Type.VIDEO)
-        //MediaListItem(mediaItem = mediaItem, navController = navController)
+        MediaListItem(mediaItem = mediaItem, onClick = {})
     }
 }

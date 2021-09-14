@@ -10,12 +10,15 @@ import com.antonioleiva.mymovies.ui.MyMoviesApp
 
 @ExperimentalFoundationApi
 @Composable
-fun MainScreen(navController: NavHostController) {
+fun MainScreen(onNavigate: (Int) -> Unit) {
     MyMoviesApp {
         Scaffold(
             topBar = { MainAppBar() }
         ) { padding ->
-            MediaList(navController, Modifier.padding(padding))
+            MediaList(
+                onClick = { onNavigate(it.id) },
+                modifier = Modifier.padding(padding)
+            )
         }
 
     }
