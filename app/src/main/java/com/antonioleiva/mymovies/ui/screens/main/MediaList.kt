@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -47,11 +48,13 @@ fun MediaListItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    Card(
         modifier = modifier.clickable { onClick() }
     ) {
-        Thumb(mediaItem)
-        Title(mediaItem)
+        Column {
+            Thumb(mediaItem)
+            Title(mediaItem)
+        }
     }
 }
 
