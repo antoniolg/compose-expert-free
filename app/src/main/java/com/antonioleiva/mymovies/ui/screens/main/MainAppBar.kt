@@ -15,9 +15,9 @@ import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.ui.MyMoviesApp
 
 @Composable
-fun MainAppBar() {
+fun MainAppBar(text: String) {
     TopAppBar(
-        title = { Text(stringResource(id = R.string.app_name)) },
+        title = { Text(text) },
         actions = {
             AppBarAction(
                 imageVector = Icons.Default.Search,
@@ -48,6 +48,6 @@ private fun AppBarAction(
 @Composable
 fun AppBarActionPreview() {
     MyMoviesApp {
-        MainAppBar()
+        MainAppBar("My Movies")
     }
 }

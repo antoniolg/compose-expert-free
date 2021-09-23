@@ -1,6 +1,8 @@
 package com.antonioleiva.mymovies.ui.screens.shared
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircleOutline
@@ -15,11 +17,9 @@ import com.antonioleiva.mymovies.R
 import com.antonioleiva.mymovies.model.MediaItem
 
 @Composable
-fun Thumb(mediaItem: MediaItem) {
+fun Thumb(mediaItem: MediaItem, modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
-            .height(dimensionResource(R.dimen.cell_thumb_height))
-            .fillMaxWidth()
+        modifier = modifier
     ) {
         AsyncImage(
             model = mediaItem.thumb,
